@@ -1,0 +1,96 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>{{ card['name'] }}</title>
+    <link rel="stylesheet" href="/static/css/card_detail.css">
+</head>
+<body>
+<div class="card-container">
+
+    <div class="card-image">
+        <img src="{{ '/' + card['image'] }}">
+    </div>
+
+    <div class="card-info">
+        <h1>{{ card['name'] }}</h1>
+
+        {% set main_fields = [
+            ('elixir', 'Elixir Cost'),
+            ('type', 'Type'),
+            ('unit', 'Unit'),
+            ('rarity', 'Rarity'),
+            ('description', 'Description'),
+            ('targets', 'Targets'),
+            ('arena', 'Arena')
+        ] %}
+
+        {% for key, label in main_fields %}
+            {% if card[key] %}
+                <p>
+                    <span class="label">{{ label }}:</span>
+                    <span class="value">{{ card[key] }}</span>
+                </p>
+            {% endif %}
+        {% endfor %}
+
+        {% if card['evo'] %}
+            <p><span class="label">Evo:</span> <span class="value">True</span></p>
+        {% endif %}
+        {% if card['count'] %}
+            <p><span class="label">Count:</span> <span class="value">{{ card['count'] }}</span></p>
+        {% endif %}
+
+        <button class="dropbtn">Additional Information</button>
+        <div class="dropdown-content">
+
+            {% set extra_fields = [
+                ('health', 'Health'),
+                ('damage', 'Damage'),
+                ('crown_tower_damage', 'Crown Tower Damage'),
+                ('building_damage', 'Building Damage'),
+                ('speed', 'Speed'),
+                ('range', 'Range'),
+                ('radius', 'Radius'),
+                ('hit_speed', 'Hit Speed'),
+                ('duration', 'Duration'),
+                ('lifetime', 'Lifetime'),
+                ('spawn_count', 'Spawn Count'),
+                ('spawn_time', 'Spawn Time'),
+                ('troop_spawned', 'Troop Spawned'),
+                ('death_troops', 'Death Troops'),
+                ('stun_duration', 'Stun Duration'),
+                ('stun_radius', 'Stun Radius'),
+                ('production_time', 'Production Time'),
+                ('effect', 'Effect'),
+                ('heal_duration', 'Heal Duration')
+            ] %}
+
+            {% for key, label in extra_fields %}
+                {% if card[key] %}
+                    <p>
+                        <span class="label">{{ label }}:</span>
+                        <span class="value">{{ card[key] }}</span>
+                    </p>
+                {% endif %}
+            {% endfor %}
+
+            {% if card['splash'] %}
+                <p><span class="label">Splash:</span> <span class="value">True</span></p>
+            {% endif %}
+            {% if card['spawn_unit'] %}
+                <p><span class="label">Spawns Units:</span> <span class="value">True</span></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="/">Back to All Cards</a>
+</div>
+
+<script src="/static/js/script.js"></script>
+
+<style>
+
+</style>
+
+</body>
+</html>
